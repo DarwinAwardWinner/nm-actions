@@ -38,10 +38,19 @@ class NetworkManagerStateChangeHandler(object):
         self.last_connection_status = new_connection_status
 
 if __name__ == '__main__':
-    def connect_handler():
-        print "Connected"
-    def disconnect_handler():
-        print "Disconnected"
-    handler = NetworkManagerStateChangeHandler(connect_handler, disconnect_handler)
-    loop = gobject.MainLoop()
-    loop.run()
+    import plac
+    import os
+    @plac.annotations(
+        # opt=(helptext, kind, abbrev, type, choices, metavar)
+        connect_command=('Command to be run when NetworkManager connects to the internet.', 'positional'),
+        disconnect_command=('Command to be run when NetworkManager disconnects from the internet.', 'positional')
+        )
+    def main(connect_command, disconnect_command):
+        def connect_handler():
+            os.system(connect_command)
+        def disconnect_handler():
+            os.system(disconnect_command)
+        handler = NetworkManagerStateChangeHandler(connect_handler, disconnect_handler)
+        loop = gobject.MainLoop()
+        loop.run()
+    plac.call(main)
