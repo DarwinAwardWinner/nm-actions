@@ -46,6 +46,7 @@ if __name__ == '__main__':
         disconnect_command=('Command to be run when NetworkManager disconnects from the internet.', 'positional')
         )
     def main(connect_command, disconnect_command):
+        """Set up commands to be run when Network Manager connects or disconnects."""
         def connect_handler():
             os.system(connect_command)
         def disconnect_handler():
