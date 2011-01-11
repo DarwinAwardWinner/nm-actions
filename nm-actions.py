@@ -48,8 +48,10 @@ if __name__ == '__main__':
     def main(connect_command, disconnect_command):
         """Set up commands to be run when Network Manager connects or disconnects."""
         def connect_handler():
+            print "Connected."
             os.system(connect_command)
         def disconnect_handler():
+            print "Disconnected."
             os.system(disconnect_command)
         handler = NetworkManagerStateChangeHandler(connect_handler, disconnect_handler)
         loop = gobject.MainLoop()
