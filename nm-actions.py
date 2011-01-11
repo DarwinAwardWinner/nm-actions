@@ -45,6 +45,8 @@ if __name__ == '__main__':
         connect_command=('Command to be run when NetworkManager connects to the internet.', 'positional'),
         disconnect_command=('Command to be run when NetworkManager disconnects from the internet.', 'positional')
         )
+    # TODO: Communicate with and update running instance via sockets,
+    # thus ensuring single-instance.
     def main(connect_command, disconnect_command):
         """Set up commands to be run when Network Manager connects or disconnects."""
         def connect_handler():
